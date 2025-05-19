@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> WebRTC Video Chat</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="./src/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <header>
+      <div class="logo">
+        <i class="fas fa-video"></i>
+        <h1> WebRTC Chat</h1>
+      </div>
+      <div class="status-indicator offline">
+        <span class="status-dot"></span>
+        <span class="status-text">מנותק</span>
+      </div>
+    </header>
+
+    <main>
+      <div class="video-grid">
+        <div class="video-container local">
+          <video id="localVideo" autoplay playsinline muted></video>
+          <div class="video-overlay">
+            <div class="user-info">
+              <span class="name">אתה</span>
+              <span class="connection-quality"><i class="fas fa-signal"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="video-container remote">
+          <video id="remoteVideo" autoplay playsinline></video>
+          <div class="video-overlay">
+            <div class="user-info">
+              <span class="name">משתמש מרוחק</span>
+              <span class="connection-quality"><i class="fas fa-signal"></i></span>
+            </div>
+          </div>
+          <div class="no-remote-stream">
+            <i class="fas fa-user-slash"></i>
+            <p>אין חיבור למשתמש מרוחק</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls-container">
+        <div class="steps">
+          <div class="step" id="step1">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h3>הפעל מצלמה</h3>
+              <button id="webcamButton" class="primary-button">
+                <i class="fas fa-video"></i>
+                <span>הפעל מצלמה</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="step" id="step2">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h3>צור שיחה חדשה</h3>
+              <button id="createCallButton" class="primary-button" disabled>
+                <i class="fas fa-phone-alt"></i>
+                <span>צור שיחה</span>
+              </button>
+              <div class="room-id-container hidden" id="roomIdContainer">
+                <p>קוד השיחה:</p>
+                <div class="room-id-display">
+                  <span id="roomId"></span>
+                  <button id="copyButton" class="icon-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="help-text">שלח את הקוד למי שברצונך לשוחח איתו</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="step" id="step3">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h3>הצטרף לשיחה קיימת</h3>
+              <div class="join-form">
+                <input type="text" id="callInput" placeholder="הכנס קוד שיחה" disabled>
+                <button id="answerButton" class="primary-button" disabled>
+                  <i class="fas fa-phone"></i>
+                  <span>הצטרף</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="step" id="step4">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h3>סיים שיחה</h3>
+              <button id="hangupButton" class="danger-button" disabled>
+                <i class="fas fa-phone-slash"></i>
+                <span>נתק</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="call-actions hidden">
+          <button id="toggleMicButton" class="action-button">
+            <i class="fas fa-microphone"></i>
+          </button>
+          <button id="toggleVideoButton" class="action-button">
+            <i class="fas fa-video"></i>
+          </button>
+          <button id="toggleFullscreenButton" class="action-button">
+            <i class="fas fa-expand"></i>
+          </button>
+          <button id="shareScreenButton" class="action-button">
+            <i class="fas fa-desktop"></i>
+          </button>
+          <button id="resetVideoButton" class="action-button" title="אתחל וידאו">
+            <i class="fas fa-sync"></i>
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <div class="toast-container" id="toastContainer"></div>
+  </div>
+
+  <script type="module" src="./src/index.js"></script>
+</body>
+</html>
+
